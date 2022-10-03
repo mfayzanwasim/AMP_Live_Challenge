@@ -27,9 +27,15 @@ RSpec.describe "PasswordValidationServiceTest", :type => :request do
     end
   end
 
-  describe "when less than three numbers are provided in input" do
+  describe "when input is not between 10 to 15 characters length" do
     it "should raise exception with message The length of the input must be between 10 and 15 characters" do
       expect { PasswordValidationService.new('PASS123').validate! }.to raise_error(Exceptions::InvalidPasswordException)
+    end
+  end
+
+  describe "when input is between 5 to 8 characters length" do
+    it "should raise exception with message The length of the input must be between 10 and 15 characters" do
+      expect { PasswordValidationService.new('PASS123', length: { min: 5, max: 8}).validate! }.not_to raise_error
     end
   end
 end
