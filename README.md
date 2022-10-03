@@ -18,9 +18,15 @@ rspec spec/features/validator_spec.rb
 This should run 5 test blocks that describe the errors and 1 test block that allows for valid input and 1 test block that passes by skipping the validations.
 
 ## Expected arguments
-The service for input validation is called InputValidationService
-Expected arguments are at least the input that is to be validated, followed by skip_validations: [],  length: { min: DEFAULT_MIN_LENGTH_OF_INPUT, max: DEFAULT_MAX_LENGTH_OF_INPUT })
-If skip_validations is provided an array of methods to skip then the validations performed in those methods are not run and results in errors not being added to the exception message array.
+The service for input validation is called
+```ruby
+InputValidationService
+```
+Expected arguments are at least the input that is to be validated, followed by:
+1. skip_validations: []
+2. length: { min: DEFAULT_MIN_LENGTH_OF_INPUT, max: DEFAULT_MAX_LENGTH_OF_INPUT })
+
+If skip_validations is provided with an array of methods to skip then the validations performed in those methods are not run and results in errors not being added to the exception message array.
 Also, length can be tweaked to change the Minimum expected length of the input and also the maximum expected length of the input
 
 
