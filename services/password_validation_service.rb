@@ -9,16 +9,17 @@ class PasswordValidationService
   NUMERICALITY_REGEX = /(.*[0-9]){3}/i.freeze
   VALIDATIONS = %i[validate_length! validate_case! validate_numericality!]
 
-  def initialize(password,  options: { skip_validation: [], length: { min: DEFAULT_MIN_LENGTH_OF_PASSWORD, max: DEFAULT_MAX_LENGTH_OF_PASSWORD } })
+  def initialize(password, skip_validations: [], length: { min: DEFAULT_MIN_LENGTH_OF_PASSWORD, max: DEFAULT_MAX_LENGTH_OF_PASSWORD })
     self.password = password
     self.errors = []
-    self.skip_validations = options[:skip_validation]
-    self.min_length =  options[:length][:min]
-    self.max_length =  options[:length][:max]
+    self.skip_validations = skip_validations
+    self.min_length = length[:min]
+    self.max_length = length[:max]
   end
 
   def validate
     VALIDATIONS.each do |validation|
+      next if skip_validations.include?(validation)
       self.send(validation)
     end
 

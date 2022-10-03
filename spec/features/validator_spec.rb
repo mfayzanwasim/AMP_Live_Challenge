@@ -9,9 +9,15 @@ RSpec.describe "PasswordValidationServiceTest", :type => :request do
     end
   end
 
+  describe "when invalid input is provided and skip validations is used" do
+    it "should throw no exceptions" do
+      expect { PasswordValidationService.new('', skip_validations: %i[validate_length! validate_case! validate_numericality!] ).validate! }.not_to raise_error
+    end
+  end
+
   describe "when less than three numbers are provided in input" do
     it "should raise exception with message The input must include at least 3 numbers" do
-      expect { PasswordValidationService.new('myPASS12word').validate! }.to raise_error(Exceptions::InvalidPasswordException)
+      expect { PasswordValidationService.new('myPASS12word').validate! }.to raise_exception(Exceptions::InvalidPasswordException)
     end
   end
 
