@@ -1,4 +1,4 @@
-
+require_relative '../../services/input_validation_service'
 require_relative '../../exceptions/invalid_input_exception'
 
 RSpec.describe "InputValidationServiceTest", :type => :request do
